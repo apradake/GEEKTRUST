@@ -12,22 +12,33 @@ import com.traffic.geektrust.FetchDataFromFile;
 
 public class Geektrust
 {
+	static int  ORBIT1CRATO=18;
+	static int ORBIT2CRATO=20;	
+	static double ORBIT1DISTANCE=18;
+    static double ORBITDISTANCE=20;
+
+	public static double getORBIT1DISTANCE()
+	{
+		return ORBIT1DISTANCE;
+	}
+
+	public static double getORBITDISTANCE() 
+	{
+		return ORBITDISTANCE;
+	}
 
 	public static void main (String[] args) throws IOException
 	{
 		
 		
-		/************************************************************/
-		int ORBIT1CRATO=18;
-		int ORBIT2CRATO=20;	
-
         //		Fetch SEASON ORBIT 1 Speed and ORBIT 2 Speed from file passed by user
 		
 		FetchDataFromFile fd= new FetchDataFromFile();
 		String ips[]=fd.returnUserInput("userInput.txt");
 		String  userInputSeason=ips[0];
-		int  userInputOR1speed=Integer.parseInt(ips[1]);
-		int  userInputOR2speed=Integer.parseInt(ips[2]);
+		double  userInputOR1speed=Float.parseFloat(ips[1]);
+		double  userInputOR2speed=Float.parseFloat(ips[2]);
+		
 		
 		// Calculate crator count depending upon wheather
 		
@@ -40,7 +51,9 @@ public class Geektrust
 		List l;
 		ReturnVehicles rv= new ReturnVehicles();
 		l= rv.returnPossibleVehicle(userInputSeason);
-		System.out.println(l);
+		
+		CalculateOrbitTravelTime ott= new CalculateOrbitTravelTime();
+		ott.returnTravelTime(l,userInputOR1speed,userInputOR2speed);
 		
 		
 	}
