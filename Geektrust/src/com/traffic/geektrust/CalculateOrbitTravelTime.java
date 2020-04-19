@@ -78,9 +78,7 @@ public class CalculateOrbitTravelTime
 							ind++;
 		}
 	    
-		
-	    
-		
+	
 		
 		return timeAndvehicle;
 	}
