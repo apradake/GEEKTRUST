@@ -1,7 +1,11 @@
 package com.traffic.geektrust;
 
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
+
 import com.traffic.geektrust.*;
 
 
@@ -12,13 +16,17 @@ public class CalculateOrbitTravelTime
  	 final float SUPERCARSPEED=20;
  	 
 
-	public String[] returnTravelTime(List vList, double userInpOr1Speed, double userInpOr2Speed)
+	public String[] returnTravelTime(List vList, double inpForOrbit, double cratorsNum)
 	{
 		String[] timeAndvehicle= new String[3];
 		double vehicleSpeed;
 		Geektrust gk= new Geektrust();
 						
 		Iterator it= vList.iterator();
+		Map<Double,String> mapDat = new TreeMap(); 
+		
+		
+		
 		
 	      while(it.hasNext())
 	      {
@@ -27,33 +35,41 @@ public class CalculateOrbitTravelTime
 	    	  			
 							if (vehicle.equalsIgnoreCase("tuktuk"))			
 							{
-								if (TUKTUKSPEED>userInpOr1Speed){vehicleSpeed=userInpOr1Speed;}
+								if (TUKTUKSPEED>inpForOrbit){vehicleSpeed=inpForOrbit;}
 								else{ vehicleSpeed=TUKTUKSPEED;}
-								double timeForTravel=gk.ORBIT1DISTANCE/vehicleSpeed;
-								System.out.println("Time by TUKTUk is "+timeForTravel+" hours");
+								double timeForTravel=gk.ORBIT1DISTANCE/vehicleSpeed*60;
+								double cratorTime=cratorsNum*1;
+								double finalTime=timeForTravel+cratorTime;
+								System.out.println("By TUKTUK is "+finalTime+" Mins");
+								mapDat.put(finalTime,"TUKTUK");
 								
 							}
 							else  if (vehicle.equalsIgnoreCase("bike"))			
 							{
-								if (BIKESPEED>userInpOr1Speed){vehicleSpeed=userInpOr1Speed;}
+								if (BIKESPEED>inpForOrbit){vehicleSpeed=inpForOrbit;}
 								else{vehicleSpeed=BIKESPEED;}
-								double timeForTravel=gk.ORBIT1DISTANCE/vehicleSpeed;
-								System.out.println("Time by BIKE is "+timeForTravel+" hours");
-							}
+								double timeForTravel=gk.ORBIT1DISTANCE/vehicleSpeed*60;
+								double cratorTime=cratorsNum*2;
+								double finalTime=timeForTravel+cratorTime;
+								System.out.println("By BIKE is "+finalTime+" mins");
+								mapDat.put(finalTime,"BIKE");						}
 							else
 							{
-								if (SUPERCARSPEED>userInpOr1Speed){vehicleSpeed=userInpOr1Speed;}
+								if (SUPERCARSPEED>inpForOrbit){vehicleSpeed=inpForOrbit;}
 								else{vehicleSpeed=SUPERCARSPEED;}
-								double timeForTravel=gk.getORBIT1DISTANCE()/vehicleSpeed;
-								System.out.println("Time by SUPERCAR is "+timeForTravel+" hours");
+								double timeForTravel=gk.getORBIT1DISTANCE()/vehicleSpeed*60;
+								double cratorTime=cratorsNum*3;
+								double finalTime=timeForTravel+cratorTime;
+								System.out.println("By SUPERCAR is "+finalTime+" mins");
+								mapDat.put(finalTime,"SUPERCAR");
 							}
-							System.out.println(vehicleSpeed);
+							
 		}
-			
-	     
 		
-		
-		
+	      for (Map.Entry<Double, String> entry : mapDat.entrySet())  
+	            System.out.println("Key = " + entry.getKey() +  
+	                         ", Value = " + entry.getValue()); 
+
 		
 		
 		return timeAndvehicle;

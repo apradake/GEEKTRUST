@@ -47,13 +47,17 @@ public class Geektrust
 		int seasonCratorOR1=cratorCount[0];
 		int seasonCratorOR2=cratorCount[1];
 
-		// CALCULATE POSSIBLE VEHIVLE EPENDING UPON SEASON 
+		// CALCULATE POSSIBLE VEHIVLE DEPENDING UPON SEASON 
+		
 		List l;
 		ReturnVehicles rv= new ReturnVehicles();
 		l= rv.returnPossibleVehicle(userInputSeason);
 		
+		//CALCULATING TIME FOR EACH VEHICLE ACCORDING TO SEASON
 		CalculateOrbitTravelTime ott= new CalculateOrbitTravelTime();
-		ott.returnTravelTime(l,userInputOR1speed,userInputOR2speed);
+		ott.returnTravelTime(l,userInputOR1speed,seasonCratorOR1);
+		ott.returnTravelTime(l,userInputOR2speed,seasonCratorOR2);
+		
 		
 		
 	}
