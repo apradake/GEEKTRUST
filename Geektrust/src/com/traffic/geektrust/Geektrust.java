@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 import java.util.StringTokenizer;
@@ -56,7 +57,19 @@ public class Geektrust
 		//CALCULATING TIME FOR EACH VEHICLE ACCORDING TO SEASON
 		CalculateOrbitTravelTime ott= new CalculateOrbitTravelTime();
 		ott.returnTravelTime(l,userInputOR1speed,seasonCratorOR1);
+		
+		double[] t1=ott.returnTimeArray();
+		String[] v1=ott.returnVehiclesName();
+		
 		ott.returnTravelTime(l,userInputOR2speed,seasonCratorOR2);
+		double[] t2=ott.returnTimeArray();
+		String[] v2=ott.returnVehiclesName();
+		
+		
+		CompareAndReturn cr= new  CompareAndReturn();
+		String result=cr.returnBestCombi(t1, v1, t2, v2);
+		System.out.println(result);
+		
 		
 		
 		
