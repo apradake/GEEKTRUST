@@ -17,62 +17,76 @@ public class CalculateOrbitTravelTime
  	 final float SUPERCARSPEED=20;
      double speedList[];
 	 String vehiclename[];
-	
- 	 
-
-	public String[] returnTravelTime(List vList, double inpForOrbit, double cratorsNum)
+	public String[] returnTravelTime(List vList, double inpForOrbit, double cratorsNum , String orbitName)
 	{
 		String[] timeAndvehicle= new String[3];
 		double vehicleSpeed;
 		Geektrust gk= new Geektrust();
 		int ArrayLen=vList.size();
 		speedList= new double[ArrayLen];
-		vehiclename= new String[ArrayLen];
-						
+		vehiclename= new String[ArrayLen];						
 		Iterator it= vList.iterator();
-		
-		
 		int ind=0;
 		    while(it.hasNext())
 	      {
 	       
 	    	  				String vehicle=(String) it.next();
-	    	  			
-							if (vehicle.equalsIgnoreCase("tuktuk"))			
-							{
-								if (TUKTUKSPEED>inpForOrbit){vehicleSpeed=inpForOrbit;}
-								else{ vehicleSpeed=TUKTUKSPEED;}
-								double timeForTravel=gk.ORBIT1DISTANCE/vehicleSpeed*60;
-								double cratorTime=cratorsNum*1;
-								double finalTime=timeForTravel+cratorTime;
-								
-								speedList[ind]=finalTime;
-								vehiclename[ind]="TUKTUK";
-								
-							}
-							else  if (vehicle.equalsIgnoreCase("bike"))			
+	    	  				
+	    	  				if (vehicle.equalsIgnoreCase("bike"))			
 							{
 								if (BIKESPEED>inpForOrbit){vehicleSpeed=inpForOrbit;}
 								else{vehicleSpeed=BIKESPEED;}
-								double timeForTravel=gk.ORBIT1DISTANCE/vehicleSpeed*60;
+								double timeForTravel;
+								if (orbitName.equalsIgnoreCase("one"))
+								{	
+								 timeForTravel=gk.ORBIT1DISTANCE/vehicleSpeed*60;
+			     				}
+								else
+								{
+									 timeForTravel=gk.ORBIT2DISTANCE /vehicleSpeed*60;
+								}
 								double cratorTime=cratorsNum*2;
 								double finalTime=timeForTravel+cratorTime;
-								
 								speedList[ind]=finalTime;
 								vehiclename[ind]="BIKE";
 													
 							}
-							else
+	    	  				else if (vehicle.equalsIgnoreCase("tuktuk"))			
+							{
+								if (TUKTUKSPEED>inpForOrbit){vehicleSpeed=inpForOrbit;}
+								else{ vehicleSpeed=TUKTUKSPEED;}
+								double timeForTravel;
+								if (orbitName.equalsIgnoreCase("one"))
+								{	
+								 timeForTravel=gk.ORBIT1DISTANCE/vehicleSpeed*60;
+			     				}
+								else
+								{
+									 timeForTravel=gk.ORBIT2DISTANCE /vehicleSpeed*60;
+								}
+								double cratorTime=cratorsNum*1;
+								double finalTime=timeForTravel+cratorTime;
+								speedList[ind]=finalTime;								
+								vehiclename[ind]="TUKTUK";
+								
+							}
+							 else
 							{
 								if (SUPERCARSPEED>inpForOrbit){vehicleSpeed=inpForOrbit;}
 								else{vehicleSpeed=SUPERCARSPEED;}
-								double timeForTravel=gk.getORBIT1DISTANCE()/vehicleSpeed*60;
+								double timeForTravel;
+								if (orbitName.equalsIgnoreCase("one"))
+								{	
+								 timeForTravel=gk.ORBIT1DISTANCE/vehicleSpeed*60;
+			     				}
+								else
+								{
+									 timeForTravel=gk.ORBIT2DISTANCE /vehicleSpeed*60;
+								}
 								double cratorTime=cratorsNum*3;
-								double finalTime=timeForTravel+cratorTime;
-								
-								speedList[ind]=finalTime;
+								double finalTime=timeForTravel+cratorTime;	
+								speedList[ind]=finalTime;								
 								vehiclename[ind]="SUPERCAR";
-								
 							}
 							
 							ind++;

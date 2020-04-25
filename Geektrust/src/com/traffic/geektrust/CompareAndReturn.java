@@ -10,41 +10,44 @@ public class CompareAndReturn
 	{
 		String returnVal="";
 		double finalAns;
-		double[] temp1=timearray1;
-		double[] temp2=timearray2;
+		double[] temp1= new double [timearray1.length];
+		double[] temp2= new double [timearray2.length];
 		double ORBIT_1;
 		double ORBIT_2;
-		Arrays.sort(timearray1); Arrays.sort(timearray2);
+		
+		
+		for (int i=0;i<timearray1.length;i++)
+		{
+			temp1[i]=timearray1[i];
+		}
+		
+		for (int i=0;i<timearray2.length;i++)
+		{
+			temp2[i]=timearray2[i];
+		}
+		
+		
+		Arrays.sort(timearray1);
+		Arrays.sort(timearray2);
+		
+	
 		ORBIT_1=timearray1[0];
 		ORBIT_2=timearray2[0];
-		
-		System.out.println(Arrays.toString(timearray1));
-		System.out.println(Arrays.toString(timearray2));
-		
-		System.out.println(Arrays.toString(vehiclearray2));
-	
-		System.out.println("timesss"+ORBIT_1+"--"+ORBIT_2);
-		
+			
 		if (ORBIT_1>ORBIT_2)
 		{
-			int index=findIndex(temp2, ORBIT_2);
-			System.out.println("orbit 2 picked "+index);
-			String veh=vehiclearray2[index];
 			
+			int index=findIndex(temp2, ORBIT_2);
+			String veh=vehiclearray2[index];			
 			returnVal+=veh+" ORBIT2";
 		}
 		else
 		{
+			
 			int index=findIndex(temp1, ORBIT_1);
 			String veh=vehiclearray1[index];
-			System.out.println("orbit 2 picked "+index);
 			returnVal+=veh+" ORBIT1";
-		}
-		
-		
-	
-		
-		
+		}		
 		return returnVal;
 	}
 	
